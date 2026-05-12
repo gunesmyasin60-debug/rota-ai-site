@@ -2,15 +2,50 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, MapPin } from "lucide-react";
+import { Send, Mail, MapPin, Loader2 } from "lucide-react";
 
 export default function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    business: "",
+    email: "",
+    service: "",
+    message: "",
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({ name: "", business: "", email: "", service: "", message: "" });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        alert("Bir hata oluştu. Lütfen tekrar deneyin.");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      alert("Mesaj gönderilemedi. Lütfen bağlantınızı kontrol edin.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -76,23 +111,38 @@ export default function Contact() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Adınız"
                   required
                   className="form-input"
                 />
                 <input
                   type="text"
+                  name="business"
+                  value={formData.business}
+                  onChange={handleChange}
                   placeholder="İşletme Adı"
                   className="form-input"
                 />
               </div>
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="E-posta Adresiniz"
                 required
                 className="form-input"
               />
-              <select className="form-input text-[var(--color-muted-light)]" defaultValue="">
+              <select 
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+                required
+                className="form-input text-[var(--color-muted-light)]"
+              >
                 <option value="" disabled>
                   Hizmet Seçin
                 </option>
@@ -104,6 +154,9 @@ export default function Contact() {
                 <option>Uygulama Geliştirme</option>
               </select>
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 placeholder="Projeniz hakkında kısaca bilgi verin..."
                 rows={4}
                 className="form-input resize-none"
@@ -111,11 +164,14 @@ export default function Contact() {
 
               <motion.button
                 type="submit"
+                disabled={isSubmitting}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="btn-primary w-full justify-center mt-2"
+                className="btn-primary w-full justify-center mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {submitted ? (
+                {isSubmitting ? (
+                  <Loader2 className="animate-spin" size={18} />
+                ) : submitted ? (
                   "✓ Mesajınız Gönderildi!"
                 ) : (
                   <>
