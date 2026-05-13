@@ -33,11 +33,12 @@ export default function Contact() {
         setFormData({ name: "", business: "", email: "", service: "", message: "" });
         setTimeout(() => setSubmitted(false), 5000);
       } else {
-        alert("Bir hata oluştu. Lütfen tekrar deneyin.");
+        const errorData = await response.json();
+        alert(`Hata: ${errorData.error || 'Bilinmeyen bir sorun oluştu.'}`);
       }
     } catch (error) {
       console.error("Form submission error:", error);
-      alert("Mesaj gönderilemedi. Lütfen bağlantınızı kontrol edin.");
+      alert(`Mesaj gönderilemedi: ${(error as Error).message}`);
     } finally {
       setIsSubmitting(false);
     }
