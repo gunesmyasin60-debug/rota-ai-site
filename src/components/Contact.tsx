@@ -1,3 +1,4 @@
+// Debug: Triggering fresh deployment for Coolify - Contact form detailed alerts verified
 "use client";
 
 import { useState } from "react";
