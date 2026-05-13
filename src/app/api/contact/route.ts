@@ -1,3 +1,4 @@
+// Debug: Triggering fresh deployment for Coolify
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
