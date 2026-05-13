@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     const { data, error } = await resend.emails.send({
       // NOT: Alan adı doğrulanmadıysa 'onboarding@resend.dev' kullanılması gerekebilir.
       from: 'ROTA-AI <onboarding@resend.dev>', 
-      to: ['muyagunesyasim@gmail.com'],
+              to: ['hakandark095@gmail.com'],
       subject: `Yeni Proje Talebi: ${name}`,
       replyTo: email,
       html: `
