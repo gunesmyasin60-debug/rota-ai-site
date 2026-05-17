@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Send, CheckCheck, Phone, RefreshCw, AlertCircle, ShieldCheck, Mail, Globe } from "lucide-react";
+import { Sparkles, Send, CheckCheck, Phone, RefreshCw, AlertCircle, ShieldCheck } from "lucide-react";
 
 interface Message {
   id: string;
@@ -131,7 +131,6 @@ export default function AutomationAuditWizard() {
             callback: (token: string) => {
               setFormData((prev) => ({ ...prev, turnstileToken: token }));
               setError(null);
-              // Token alındığında otomatik olarak API'ye gönderimi başlat!
               submitData(token);
             },
             "error-callback": () => {
@@ -148,9 +147,8 @@ export default function AutomationAuditWizard() {
   const handleOptionClick = (option: string) => {
     setError(null);
     
-    // Kullanıcı cevabını ekle
     setMessages((prev) => [
-      ...prev.map((m) => ({ ...m, isButtonOptions: false })), // Eski butonları gizle/pasif et
+      ...prev.map((m) => ({ ...m, isButtonOptions: false })),
       {
         id: Date.now().toString(),
         sender: "user",
@@ -227,7 +225,6 @@ export default function AutomationAuditWizard() {
           }
         ]);
         setChatStep("website");
-        // Input odağını otomatik sağla
         setTimeout(() => inputRef.current?.focus(), 100);
       }, 1200);
     }
@@ -245,7 +242,6 @@ export default function AutomationAuditWizard() {
     const userInput = inputValue.trim();
     setInputValue("");
 
-    // Kullanıcı mesajını ekle
     setMessages((prev) => [
       ...prev.map((m) => ({ ...m, isButtonOptions: false })),
       {
@@ -263,7 +259,6 @@ export default function AutomationAuditWizard() {
       goToEmailStep();
     } 
     else if (chatStep === "email") {
-      // Basit E-Posta Doğrulaması
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(userInput)) {
         setTimeout(() => {
@@ -328,7 +323,6 @@ export default function AutomationAuditWizard() {
     setIsTyping(true);
     setChatStep("submitting");
 
-    // Form datasını güncel token ile hazırla
     const finalData = {
       ...formData,
       turnstileToken: token,
@@ -422,189 +416,208 @@ export default function AutomationAuditWizard() {
           </p>
         </div>
 
-        {/* 3D Görünümlü Premium WhatsApp/Sohbet Arayüzü Kartı */}
-        <div className="max-w-2xl mx-auto bg-slate-900 rounded-[36px] p-3 shadow-2xl border-4 border-slate-700 glow-ring relative overflow-hidden">
-          <div className="w-full h-[550px] bg-[#E5DDD5] rounded-[28px] overflow-hidden flex flex-col relative">
+        {/* 3D Görünümlü Premium Akıllı Telefon Simülatörü (Üsttekiyle Birebir Aynı) */}
+        <div className="flex justify-center">
+          <div className="relative w-[340px] h-[670px] bg-slate-900 rounded-[50px] p-3 shadow-2xl border-4 border-slate-700 glow-ring">
             
-            {/* Sohbet Üst Çubuğu (Header) */}
-            <div className="bg-[#075E54] text-white px-4 py-3 flex items-center justify-between shadow-md z-10">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center font-bold text-sm text-white shadow-inner animate-pulse-soft">
-                  AI
+            {/* Ahize & Ön Kamera Boşluğu (Dynamic Island Mock) */}
+            <div className="absolute top-6 left-1/2 -translate-x-1/2 w-28 h-6 bg-black rounded-full z-20 flex items-center justify-end px-3">
+              <div className="w-2.5 h-2.5 bg-neutral-800 rounded-full" />
+            </div>
+
+            {/* Ekran İçeriği */}
+            <div className="w-full h-full bg-[#E5DDD5] rounded-[40px] overflow-hidden flex flex-col relative">
+              
+              {/* Telefon Durum Çubuğu */}
+              <div className="h-9 bg-[#075E54] text-white flex justify-between items-center px-6 pt-3 text-[10px] z-10">
+                <span>14:52</span>
+                <div className="flex items-center gap-1">
+                  <div className="w-3 h-2 border border-white rounded-sm bg-white" />
                 </div>
-                <div>
-                  <h4 className="font-semibold text-xs leading-none flex items-center gap-1.5">
-                    ROTA ANALİZ ASİSTANI
-                    <span className="w-2 h-2 bg-green-400 rounded-full inline-block animate-ping" />
-                  </h4>
-                  <span className="text-[9px] text-green-300">
-                    {isTyping ? "yazıyor..." : "çevrimiçi"}
+              </div>
+
+              {/* WhatsApp Header */}
+              <div className="bg-[#075E54] text-white px-4 py-3 flex items-center justify-between shadow-md z-10">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center font-bold text-sm text-white shadow-inner">
+                    AI
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-xs leading-none flex items-center gap-1.5">
+                      ROTA ASİSTAN
+                      <span className="w-1.5 h-1.5 bg-green-400 rounded-full inline-block animate-pulse" />
+                    </h4>
+                    <span className="text-[9px] text-green-300">
+                      {isTyping ? "yazıyor..." : "çevrimiçi"}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 opacity-80">
+                  <Phone className="w-4 h-4 cursor-pointer hover:scale-110 transition-all" />
+                  <span className="text-[8px] bg-green-600/50 px-1.5 py-0.5 rounded-full border border-green-500 text-[8px]">
+                    Ücretsiz
                   </span>
                 </div>
               </div>
-              <div className="flex items-center gap-3 opacity-80">
-                <Phone className="w-4 h-4 cursor-pointer hover:scale-110 transition-all" />
-                <span className="text-[10px] bg-green-600/50 px-2 py-0.5 rounded-full border border-green-500 text-xs">
-                  Ücretsiz
-                </span>
-              </div>
-            </div>
 
-            {/* Sohbet Mesaj Listesi */}
-            <div 
-              className="flex-1 overflow-y-auto p-4 space-y-4 relative"
-              style={{
-                backgroundImage: "url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')",
-                backgroundSize: "cover",
-              }}
-            >
-              <AnimatePresence>
-                {messages.map((msg) => (
-                  <motion.div
-                    key={msg.id}
-                    initial={{ opacity: 0, y: 15, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className={`flex flex-col max-w-[85%] relative ${
-                      msg.sender === "bot" ? "mr-auto" : "ml-auto"
-                    }`}
-                  >
-                    {/* Mesaj Baloncuğu */}
-                    <div
-                      className={`p-3 rounded-2xl text-xs shadow-sm border ${
-                        msg.sender === "bot"
-                          ? "bg-white text-dark rounded-tl-none border-slate-100"
-                          : "bg-[#DCF8C6] text-dark rounded-tr-none border-[#C7EDB1]"
+              {/* WhatsApp Sohbet Alanı */}
+              <div 
+                className="flex-1 overflow-y-auto p-4 space-y-4 relative"
+                style={{
+                  backgroundImage: "url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')",
+                  backgroundSize: "cover",
+                }}
+              >
+                <AnimatePresence>
+                  {messages.map((msg) => (
+                    <motion.div
+                      key={msg.id}
+                      initial={{ opacity: 0, y: 15, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className={`flex flex-col max-w-[85%] relative ${
+                        msg.sender === "bot" ? "mr-auto" : "ml-auto"
                       }`}
                     >
-                      <p className="whitespace-pre-line leading-relaxed font-sans font-medium text-slate-800">{msg.text}</p>
-                      
-                      {/* Cloudflare Turnstile Sohbet İçi Entegrasyonu */}
-                      {msg.isCaptcha && (
-                        <div className="mt-4 p-2 bg-slate-50 rounded-xl border border-slate-200 shadow-inner flex flex-col items-center justify-center min-h-[90px]">
-                          <div id="chat-turnstile-widget" className="scale-90 origin-center" />
-                          {error && (
-                            <p className="text-[10px] text-red-500 font-semibold mt-2 flex items-center gap-1">
-                              <AlertCircle className="w-3 h-3 shrink-0" /> {error}
-                            </p>
-                          )}
-                        </div>
-                      )}
-
-                      <div className="flex items-center justify-end gap-1 mt-1.5 text-[8px] text-slate-400 text-right">
-                        <span>{msg.time}</span>
-                        <CheckCheck className={`w-3.5 h-3.5 ${msg.sender === "user" ? "text-green-500" : "text-blue-500"}`} />
-                      </div>
-                    </div>
-
-                    {/* Karar Butonları */}
-                    {msg.isButtonOptions && msg.options && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
-                        className="mt-3 space-y-2"
+                      {/* Mesaj Baloncuğu */}
+                      <div
+                        className={`p-3 rounded-2xl text-[11px] shadow-sm border ${
+                          msg.sender === "bot"
+                            ? "bg-white text-dark rounded-tl-none border-slate-100"
+                            : "bg-[#DCF8C6] text-dark rounded-tr-none border-[#C7EDB1]"
+                        }`}
                       >
-                        {msg.options.map((opt) => (
-                          <button
-                            key={opt}
-                            onClick={() => {
-                              if (opt === "Doğrulamayı Tekrarla & Gönder") {
-                                renderTurnstile();
-                              } else {
-                                handleOptionClick(opt);
-                              }
-                            }}
-                            className="w-full bg-white hover:bg-slate-50 text-indigo-600 font-bold py-2.5 px-3 rounded-xl border border-slate-200 text-xs text-center shadow-md transition-all hover:scale-[1.02]"
-                          >
-                            {opt}
-                          </button>
-                        ))}
-                      </motion.div>
-                    )}
-                  </motion.div>
-                ))}
+                        <p className="whitespace-pre-line leading-relaxed font-sans font-medium text-slate-800">{msg.text}</p>
+                        
+                        {/* Cloudflare Turnstile Sohbet İçi Entegrasyonu */}
+                        {msg.isCaptcha && (
+                          <div className="mt-3 p-1.5 bg-slate-50 rounded-xl border border-slate-200 shadow-inner flex flex-col items-center justify-center min-h-[90px]">
+                            <div id="chat-turnstile-widget" className="scale-[0.8] origin-center" />
+                            {error && (
+                              <p className="text-[9px] text-red-500 font-semibold mt-1 flex items-center gap-1">
+                                <AlertCircle className="w-3 h-3 shrink-0" /> {error}
+                              </p>
+                            )}
+                          </div>
+                        )}
 
-                {/* Yazıyor Baloncuğu */}
-                {isTyping && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mr-auto bg-white p-3 rounded-2xl rounded-tl-none text-xs border border-slate-100 flex items-center gap-1.5 shadow-sm"
-                  >
-                    <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                    <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-              <div ref={chatEndRef} />
-            </div>
+                        <div className="flex items-center justify-end gap-1 mt-1 text-[8px] text-slate-400 text-right">
+                          <span>{msg.time}</span>
+                          <CheckCheck className={`w-3 h-3 ${msg.sender === "user" ? "text-green-500" : "text-blue-500"}`} />
+                        </div>
+                      </div>
 
-            {/* Klavye Giriş Alanı */}
-            <form 
-              onSubmit={handleCustomInputSubmit}
-              className="bg-[#f0f0f0] p-2 flex items-center gap-2 z-10 border-t border-slate-200"
-            >
-              <input
-                ref={inputRef}
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                disabled={chatStep === "welcome" || chatStep === "sector" || chatStep === "bottleneck" || chatStep === "captcha" || chatStep === "submitting" || chatStep === "success"}
-                placeholder={
-                  chatStep === "welcome" || chatStep === "sector" || chatStep === "bottleneck"
-                    ? "Cevabınızı yukarıdan seçin..."
-                    : chatStep === "website"
-                    ? "Web sitenizi yazın..."
-                    : chatStep === "email"
-                    ? "E-posta adresinizi yazın..."
-                    : chatStep === "captcha"
-                    ? "Güvenlik doğrulamasını tamamlayın..."
-                    : "İşlem yapılıyor..."
-                }
-                className="flex-1 bg-white rounded-full h-9 px-4 text-xs text-slate-800 border border-slate-200 shadow-inner focus:outline-none focus:ring-1 focus:ring-[#075E54] disabled:bg-slate-100 disabled:text-slate-400"
-              />
-              <button 
-                type="submit"
-                disabled={!inputValue.trim()}
-                className={`w-9 h-9 rounded-full flex items-center justify-center text-white transition-all shadow-md ${
-                  inputValue.trim() 
-                    ? "bg-[#075E54] hover:scale-105 active:scale-95" 
-                    : "bg-slate-300 cursor-not-allowed"
-                }`}
+                      {/* Karar Butonları */}
+                      {msg.isButtonOptions && msg.options && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.4 }}
+                          className="mt-3 space-y-2 animate-pulse-soft"
+                        >
+                          {msg.options.map((opt) => (
+                            <button
+                              key={opt}
+                              onClick={() => {
+                                if (opt === "Doğrulamayı Tekrarla & Gönder") {
+                                  renderTurnstile();
+                                } else {
+                                  handleOptionClick(opt);
+                                }
+                              }}
+                              className="w-full bg-white hover:bg-slate-50 text-indigo-600 font-bold py-2 px-2.5 rounded-xl border border-slate-200 text-[10px] text-center shadow-md transition-all hover:scale-[1.02]"
+                            >
+                              {opt}
+                            </button>
+                          ))}
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  ))}
+
+                  {/* Yazıyor Baloncuğu */}
+                  {isTyping && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="mr-auto bg-white p-3 rounded-2xl rounded-tl-none text-xs border border-slate-100 flex items-center gap-1.5 shadow-sm"
+                    >
+                      <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                <div ref={chatEndRef} />
+              </div>
+
+              {/* Klavye Giriş Alanı */}
+              <form 
+                onSubmit={handleCustomInputSubmit}
+                className="bg-[#f0f0f0] p-2 flex items-center gap-2 z-10 border-t border-slate-200"
               >
-                <Send className="w-4 h-4" />
-              </button>
-            </form>
-          </div>
-
-          {/* Başarı Durumunda Sıfırlama Butonu */}
-          {chatStep === "success" && (
-            <div className="absolute inset-0 bg-slate-900/90 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center text-white z-20">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="space-y-6 max-w-md"
-              >
-                <div className="inline-flex p-4 bg-green-500/20 text-green-400 rounded-full animate-bounce border border-green-500/30">
-                  <ShieldCheck className="w-12 h-12" />
-                </div>
-                <h3 className="text-xl font-bold">Röntgen Talebi Alındı! 🎉</h3>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  İşletmenizin verimlilik ve AI entegrasyon potansiyel analiz raporunu hazırlamaya başladık.
-                  En geç **24 saat içinde** size özel Loom video analizi **{formData.email}** adresinize gönderilecektir.
-                </p>
-                <button
-                  onClick={resetChat}
-                  className="btn-primary w-full flex items-center justify-center gap-2 mt-4"
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  disabled={chatStep === "welcome" || chatStep === "sector" || chatStep === "bottleneck" || chatStep === "captcha" || chatStep === "submitting" || chatStep === "success"}
+                  placeholder={
+                    chatStep === "welcome" || chatStep === "sector" || chatStep === "bottleneck"
+                      ? "Cevabınızı yukarıdan seçin..."
+                      : chatStep === "website"
+                      ? "Web sitenizi yazın..."
+                      : chatStep === "email"
+                      ? "E-posta adresinizi yazın..."
+                      : chatStep === "captcha"
+                      ? "Güvenlik doğrulamasını tamamlayın..."
+                      : "İşlem yapılıyor..."
+                  }
+                  className="flex-1 bg-white rounded-full h-8 px-3 text-[10px] text-slate-800 border border-slate-200 shadow-inner focus:outline-none focus:ring-1 focus:ring-[#075E54] disabled:bg-slate-100 disabled:text-slate-400"
+                />
+                <button 
+                  type="submit"
+                  disabled={!inputValue.trim()}
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-white transition-all shadow-md ${
+                    inputValue.trim() 
+                      ? "bg-[#075E54] hover:scale-105 active:scale-95" 
+                      : "bg-slate-300 cursor-not-allowed"
+                  }`}
                 >
-                  <RefreshCw className="w-4 h-4" /> Yeni Bir Analiz Başlat
+                  <Send className="w-3.5 h-3.5" />
                 </button>
-              </motion.div>
+              </form>
+
+              {/* Başarı Durumunda Sıfırlama Butonu */}
+              {chatStep === "success" && (
+                <div className="absolute inset-0 bg-slate-900/95 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center text-white z-20">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="space-y-4 max-w-[280px]"
+                  >
+                    <div className="inline-flex p-3 bg-green-500/20 text-green-400 rounded-full animate-bounce border border-green-500/30">
+                      <ShieldCheck className="w-10 h-10" />
+                    </div>
+                    <h3 className="text-base font-bold">Talep Alındı! 🎉</h3>
+                    <p className="text-[10px] text-slate-300 leading-relaxed">
+                      İşletmenizin AI entegrasyon analiz raporunu hazırlamaya başladık.
+                      En geç **24 saat içinde** size özel Loom video analizi **{formData.email}** adresinize gönderilecektir.
+                    </p>
+                    <button
+                      onClick={resetChat}
+                      className="btn-primary w-full flex items-center justify-center gap-2 mt-4 text-xs py-2"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5" /> Yeni Analiz Başlat
+                    </button>
+                  </motion.div>
+                </div>
+              )}
+
             </div>
-          )}
+          </div>
         </div>
+
       </div>
     </section>
   );
