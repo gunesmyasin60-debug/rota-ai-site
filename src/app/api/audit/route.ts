@@ -101,8 +101,8 @@ export async function POST(request: Request) {
       `;
 
       const { data, error } = await resend.emails.send({
-        from: "ROTA-AI <onboarding@resend.dev>",
-        to: ["muyagunesyasim@gmail.com"],
+        from: "ROTA-AI <iletisim@rota-ai.com.tr>",
+        to: ["muyagunesyasin@gmail.com"],
         subject: `🎥 Rota-AI Dijital Röntgen Talebi: ${email}`,
         replyTo: email,
         html: emailHtml,

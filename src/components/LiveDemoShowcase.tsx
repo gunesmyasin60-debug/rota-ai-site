@@ -185,6 +185,7 @@ export default function LiveDemoShowcase() {
   const [isTyping, setIsTyping] = useState(false);
   const [currentNode, setCurrentNode] = useState("start");
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Web Audio API ile WhatsApp Bildirim Sesi Sentezleme
   const playPing = () => {
@@ -219,9 +220,11 @@ export default function LiveDemoShowcase() {
     return now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   };
 
-  // Scroll to bottom helper
+  // Scroll to bottom only inside the chat container
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   }, [messages, isTyping]);
 
   const startSimulation = (e: React.FormEvent) => {
@@ -487,6 +490,7 @@ export default function LiveDemoShowcase() {
 
                 {/* WhatsApp Sohbet Alanı */}
                 <div 
+                  ref={chatContainerRef}
                   className="flex-1 overflow-y-auto p-4 space-y-4 relative"
                   style={{
                     backgroundImage: "url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')",
