@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Hizmetler", href: "#hizmetler" },
   { label: "Portfolyo", href: "#portfolyo" },
   { label: "SSS", href: "#sss" },
-  { label: "İletişim", href: "#iletisim" },
+  { label: "İletişim", href: "#audit" },
 ];
 
 export default function Navbar() {
@@ -58,8 +58,8 @@ export default function Navbar() {
         </div>
 
         {/* Desktop CTA */}
-        <a href="#iletisim" className="hidden md:inline-flex btn-primary !py-2.5 !px-5 !text-sm">
-          Teklif Al
+        <a href="#audit" className="hidden md:inline-flex btn-primary !py-2.5 !px-5 !text-sm">
+          Analiz Al
         </a>
 
         {/* Mobile Toggle */}
@@ -94,11 +94,11 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="#iletisim"
+                href="#audit"
                 onClick={() => setMobileOpen(false)}
                 className="btn-primary mt-2 text-center"
               >
-                Teklif Al
+                Analiz Al
               </a>
             </div>
           </motion.div>

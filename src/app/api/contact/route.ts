@@ -2,8 +2,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
       try {
               if (!process.env.RESEND_API_KEY) {
@@ -11,7 +9,8 @@ export async function POST(request: Request) {
                         return NextResponse.json({ error: 'API Anahtari eksik. Vercel ayarlarini kontrol edin.' }, { status: 500 });
               }
 
-        const { name, email, business, service, message } = await request.json();
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const { name, email, business, service, message } = await request.json();
 
         const { data, error } = await resend.emails.send({
                   from: 'ROTA-AI <iletisim@rota-ai.com.tr>',

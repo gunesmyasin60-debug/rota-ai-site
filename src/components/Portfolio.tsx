@@ -9,6 +9,7 @@ const projects = [
     category: "Din & Eğitim Platformu",
     desc: "Kapsamlı eğitim içerikleri sunan, modern ve kullanıcı dostu bir dijital platform.",
     url: "https://bahtiyarhoca.com",
+    img: "fetva",
     gradient: "from-indigo-500 to-purple-600",
   },
   {
@@ -16,13 +17,23 @@ const projects = [
     category: "Gıda & E-ticaret",
     desc: "Geleneksel lezzetleri modern tasarımla buluşturan, sipariş odaklı landing page.",
     url: "https://asaftat-baklava.vercel.app",
+    img: "asaftat",
     gradient: "from-emerald-500 to-teal-600",
+  },
+  {
+    title: "İstanbul Şifa",
+    category: "Sağlık Kabini & Klinik",
+    desc: "7/24 hizmet sunan sağlık kabini için hızlı ve mobil öncelikli online randevu ve acil arama sistemi.",
+    url: "https://istanbul-sifa.vercel.app",
+    img: "istanbul-sifa",
+    gradient: "from-teal-500 to-cyan-600",
   },
   {
     title: "Psikolog Klinik Demo",
     category: "Sağlık & Randevu Sistemi",
     desc: "Online randevu sistemi entegreli, premium tasarımlı klinik web sitesi.",
     url: "https://psychology-futuristic-web.vercel.app",
+    img: "psikolog",
     gradient: "from-violet-500 to-fuchsia-600",
   },
 ];
@@ -39,7 +50,7 @@ const cardVariants = {
 
 export default function Portfolio() {
   return (
-    <section id="portfolyo" className="bg-[var(--color-surface)]">
+    <section id="portfolyo" className="bg-[var(--color-surface)] py-24">
       <div className="container-main">
         {/* Header */}
         <motion.div
@@ -51,10 +62,10 @@ export default function Portfolio() {
         >
           <span className="section-badge mb-4 inline-flex">Portfolyo</span>
           <h2 className="heading-lg mt-4">
-            Gerçek <span className="gradient-text">Projelerimiz</span>
+            Premium <span className="gradient-text">Teknoloji Vitrini</span>
           </h2>
           <p className="text-[var(--color-muted)] mt-4 max-w-xl mx-auto text-base md:text-lg">
-            Dijital yetkinliğimizi kanıtlayan, bizzat geliştirdiğimiz canlı projeler.
+            Kod kalitemizi, hız performansımızı ve özgün tasarım estetiğimizi birebir deneyimleyebileceğiniz canlı konsept çalışmalarımız.
           </p>
         </motion.div>
 
@@ -64,7 +75,7 @@ export default function Portfolio() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {projects.map((project) => (
             <motion.a
@@ -78,9 +89,9 @@ export default function Portfolio() {
               className="glass-card overflow-hidden group block"
             >
               {/* Project Image */}
-              <div className="h-48 relative overflow-hidden">
+              <div className="h-44 relative overflow-hidden">
                 <img 
-                  src={`/portfolio/${project.title === "Bahtiyar Hoca" ? "fetva" : project.title === "A'saftat Baklava" ? "asaftat" : "psikolog"}.png`}
+                  src={`/portfolio/${project.img}.png`}
                   alt={project.title}
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
                 />
@@ -93,14 +104,14 @@ export default function Portfolio() {
               </div>
 
               {/* Content */}
-              <div className="p-6">
-                <span className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wider">
+              <div className="p-5">
+                <span className="text-[10px] font-semibold text-[var(--color-primary)] uppercase tracking-wider">
                   {project.category}
                 </span>
-                <h3 className="text-lg font-bold text-[var(--color-dark)] mt-1 mb-2">
+                <h3 className="text-base font-bold text-[var(--color-dark)] mt-1 mb-2">
                   {project.title}
                 </h3>
-                <p className="text-sm text-[var(--color-muted)] leading-relaxed line-clamp-2">
+                <p className="text-xs text-[var(--color-muted)] leading-relaxed line-clamp-3">
                   {project.desc}
                 </p>
               </div>

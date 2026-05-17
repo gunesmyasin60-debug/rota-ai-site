@@ -18,7 +18,7 @@ const footerLinks = [
       { label: "Sürecimiz", href: "#surec" },
       { label: "Portfolyo", href: "#portfolyo" },
       { label: "SSS", href: "#sss" },
-      { label: "İletişim", href: "#iletisim" },
+      { label: "Büyüme Analizi", href: "#audit" },
     ],
   },
 ];

@@ -56,7 +56,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.65 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a href="#iletisim" className="btn-primary">
+          <a href="#audit" className="btn-primary">
             Ücretsiz Analiz Al
             <ArrowRight size={18} />
           </a>
