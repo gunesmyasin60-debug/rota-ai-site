@@ -18,10 +18,10 @@ export default function Home() {
         <Hero />
         <Process />
         <Services />
+        <KobiTranslator />
         <LiveDemoShowcase />
         <Benefits />
         <Portfolio />
-        <KobiTranslator />
         <AutomationAuditWizard />
         <FAQ />
       </main>
